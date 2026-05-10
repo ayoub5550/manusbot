@@ -1,0 +1,214 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --background: #09090b;
+  --foreground: #fafafa;
+  --primary: #22c55e;
+  --primary-foreground: #052e16;
+  --secondary: #27272a;
+  --secondary-foreground: #a1a1aa;
+  --accent: #3b82f6;
+  --accent-foreground: #eff6ff;
+  --muted: #27272a;
+  --muted-foreground: #71717a;
+  --card: #18181b;
+  --card-foreground: #fafafa;
+  --border: #27272a;
+  --input: #27272a;
+  --ring: #22c55e;
+  --radius: 8px;
+  --font-sans: var(--font-geist-sans), 'Geist', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', 'JetBrains Mono', 'Fira Code', monospace;
+
+  --status-running: #f59e0b;
+  --status-completed: #22c55e;
+  --status-failed: #ef4444;
+  --status-queued: #3b82f6;
+  --status-cancelled: #71717a;
+
+  --danger: #ef4444;
+  --danger-foreground: #fef2f2;
+  --warning: #f59e0b;
+  --warning-foreground: #fffbeb;
+  --success: #22c55e;
+  --success-foreground: #f0fdf4;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    border-color: var(--border);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--background);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 2px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--muted-foreground);
+  }
+}
+
+@layer utilities {
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+
+  .text-primary-glow {
+    text-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
+  }
+
+  .card-glow-green {
+    box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.2), 0 4px 24px rgba(34, 197, 94, 0.06);
+  }
+
+  .card-glow-red {
+    box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.2), 0 4px 24px rgba(239, 68, 68, 0.06);
+  }
+
+  .card-glow-amber {
+    box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.2), 0 4px 24px rgba(245, 158, 11, 0.06);
+  }
+
+  .card-glow-blue {
+    box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.2), 0 4px 24px rgba(59, 130, 246, 0.06);
+  }
+
+  .terminal-bg {
+    background: #0a0a0a;
+    border: 1px solid #1a1a1a;
+  }
+
+  .streaming-cursor::after {
+    content: '▋';
+    animation: blink 1s step-end infinite;
+    color: var(--primary);
+  }
+
+  .sidebar-transition {
+    transition: width 300ms ease, min-width 300ms ease;
+  }
+
+  .fade-in {
+    animation: fadeIn 200ms ease forwards;
+  }
+
+  .slide-up {
+    animation: slideUp 200ms ease forwards;
+  }
+
+  .pulse-dot {
+    animation: pulseDot 2s ease-in-out infinite;
+  }
+
+  .status-running {
+    color: var(--status-running);
+    background-color: rgba(245, 158, 11, 0.1);
+  }
+
+  .status-completed {
+    color: var(--status-completed);
+    background-color: rgba(34, 197, 94, 0.1);
+  }
+
+  .status-failed {
+    color: var(--status-failed);
+    background-color: rgba(239, 68, 68, 0.1);
+  }
+
+  .status-queued {
+    color: var(--status-queued);
+    background-color: rgba(59, 130, 246, 0.1);
+  }
+
+  .status-cancelled {
+    color: var(--status-cancelled);
+    background-color: rgba(113, 113, 122, 0.1);
+  }
+
+  .tool-bash {
+    color: #a78bfa;
+    background-color: rgba(167, 139, 250, 0.1);
+  }
+
+  .tool-browser {
+    color: #38bdf8;
+    background-color: rgba(56, 189, 248, 0.1);
+  }
+
+  .tool-file {
+    color: #fb923c;
+    background-color: rgba(251, 146, 60, 0.1);
+  }
+
+  .tool-api {
+    color: #f472b6;
+    background-color: rgba(244, 114, 182, 0.1);
+  }
+
+  .tool-telegram {
+    color: #34d399;
+    background-color: rgba(52, 211, 153, 0.1);
+  }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, var(--muted) 25%, #2a2a2e 50%, var(--muted) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
